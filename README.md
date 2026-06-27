@@ -17,6 +17,7 @@ The default database is SQLite at `./sns_fastapi.db` so the answer app can run w
 ## Test
 
 ```bash
+python -m compileall app tests
 pytest
 ```
 
