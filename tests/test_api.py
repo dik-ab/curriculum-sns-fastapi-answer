@@ -71,3 +71,15 @@ def test_post_like_follow_and_chat_flow():
 
     messages = alice.get(f"/conversations/{conversation['id']}/messages").json()
     assert messages == []
+
+
+def test_logout_clears_session_cookie():
+    reset_db()
+    alice = register_login("logout-alice@example.com", "logoutalice")
+
+    res = alice.post("/auth/logout")
+
+    assert res.status_code == 204
+    set_cookie = res.headers.get("set-cookie", "")
+    assert "sns_session=" in set_cookie
+    assert "Max-Age=0" in set_cookie
