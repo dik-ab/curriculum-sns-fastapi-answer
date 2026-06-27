@@ -8,7 +8,7 @@ on:
 
 jobs:
   test-build:
-    name: Test
+    name: Test and build
     runs-on: ubuntu-latest
 
     steps:
@@ -24,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Compile
+      - name: Build check
         run: python -m compileall app tests
 
-      - name: Tests
+      - name: Unit tests
         run: pytest
