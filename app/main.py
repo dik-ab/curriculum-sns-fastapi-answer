@@ -170,9 +170,10 @@ def login(payload: LoginRequest, response: Response, db: Session = Depends(get_d
 
 
 @app.post("/auth/logout", status_code=status.HTTP_204_NO_CONTENT)
-def logout(response: Response) -> RawResponse:
+def logout() -> RawResponse:
+    response = RawResponse(status_code=status.HTTP_204_NO_CONTENT)
     clear_session_cookie(response)
-    return RawResponse(status_code=status.HTTP_204_NO_CONTENT)
+    return response
 
 
 @app.get("/auth/me", response_model=MeResponse)
